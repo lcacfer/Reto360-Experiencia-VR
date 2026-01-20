@@ -7,14 +7,14 @@
     <script>
       AFRAME.registerComponent('scene-switcher', {
         schema: {
-          images: 'clase360.jpg'/*{type: 'array', default: ['clase360.jpg', 'escena-2.png', 'escena-3.png']}*/
+          images: {type: 'array', default: ['clase360.jpg', 'clase360-hell.jpg', 'clase360-old.jpg']}
         },
         init: function () {
           this.currentIndex = 0; // Inicializa el índice de la imagen actual
           this.el.addEventListener('abuttondown', this.switchScene.bind(this));
         },
         switchScene: function () {
-          this.currentIndex = this.data.images.length; // Calcula el siguiente índice de forma cíclica
+          this.currentIndex = (this.currentIndex + 1) % this.data.images.length; // Calcula el siguiente índice de forma cíclica
           var sky = document.querySelector('a-sky'); // Encuentra el elemento a-sky
           sky.setAttribute('src', this.data.images[this.currentIndex]); // Cambia la imagen del fondo
         }
